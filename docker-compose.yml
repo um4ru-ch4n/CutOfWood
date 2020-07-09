@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: CutOfWood
+      TZ: Europe/Moscow
+      PGTZ: Europe/Moscow
+  # redis:
+  #   image: redis
+  #   restart: always
+  #   volumes:
+  #     - ./storage/redis/data:/data
+  #   ports:
+  #     - 6379:6379
+  #   environment:
+  #     TZ: Europe/Moscow
+  web:
+    build: .
+    command: /bin/bash -c "cd CutOfWood && python manage.py migrate --run-syncdb && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      # - redis
+    environment:
+      TZ: Europe/Moscow
+  # celery:
+  #   build: .
+  #   command: /bin/bash -c "cd CutOfWood && celery -A CutOfWood worker -l info -P gevent"
+  #   volumes:
+  #     - .:/code
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   environment:
+  #     TZ: Europe/Moscow
+  # celery-beat:
+  #   build: .
+  #   command: /bin/bash -c "cd CutOfWood && celery -A CutOfWood beat -l info"
+  #   volumes:
+  #     - .:/code
+  #   depends_on:
+  #     - db
+  #     - redis
+  #   environment:
+  #     TZ: Europe/Moscow

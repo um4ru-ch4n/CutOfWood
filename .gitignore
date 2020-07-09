@@ -1,0 +1,5 @@
+node_modules
+.vscode
+Pipfile.lock
+storage
+__pycache__
