@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'knox',
     'accounts',
+    'frontend',
 ]
 
 REST_FRAMEWORK = {
@@ -88,7 +89,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'frontend/dist'), 
+            os.path.join(BASE_DIR, 'frontend/build'), 
             os.path.join(BASE_DIR, 'templates')
         ],
         'APP_DIRS': True,
@@ -117,8 +118,8 @@ DATABASES = {
         'NAME': 'CutOfWood',
         'USER': 'postgres',
         'PASSWORD': 'admin',
-        # 'HOST': '127.0.0.1',
-        'HOST': 'db',         # for docker-compose
+        'HOST': '127.0.0.1',
+        # 'HOST': 'db',         # for docker-compose
         'PORT': '5432',
     }
 }
@@ -163,5 +164,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend/dist/'),
+    os.path.join(BASE_DIR, 'frontend/build/static'),
 ]

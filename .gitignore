@@ -3,3 +3,4 @@ node_modules
 Pipfile.lock
 storage
 __pycache__
+package-lock.json
