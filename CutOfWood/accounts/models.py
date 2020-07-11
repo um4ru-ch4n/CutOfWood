@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class AccountManager(BaseUserManager):
-    def create_user(self, username, email, first_name="", last_name="", patronymic="", phone_number="", password=None):
+    def create_user(self, username, email, first_name="", last_name="", patronymic="", phone_number="", instagram="", password=None):
         if not email:
             raise ValueError("Users must have an email address")
         if not username:
@@ -16,6 +16,7 @@ class AccountManager(BaseUserManager):
             last_name=last_name,
             patronymic=patronymic,
             phone_number=phone_number,
+            instagram=instagram,
             )
 
         user.set_password(password)
@@ -52,6 +53,7 @@ class Account(AbstractBaseUser):
     last_name = models.CharField('Фамилия пользователя', max_length = 50, blank=True)
     patronymic = models.CharField('Отчество пользователя', max_length = 50, blank=True)
     phone_number = models.CharField('Номер телефона', max_length=15, blank=True)
+    instagram = models.CharField('Instagram', max_length=50, blank=True)
 	
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
