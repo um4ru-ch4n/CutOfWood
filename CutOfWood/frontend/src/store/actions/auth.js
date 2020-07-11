@@ -92,7 +92,7 @@ export function autoLogin() {
                 headers: {
                     'Authorization': 'Token ' + token,
                 },
-                url: "auth/user"
+                url: "user"
             };
 
             await axios(options)
